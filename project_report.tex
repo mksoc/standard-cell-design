@@ -8,6 +8,10 @@
 \usepackage{mathtools}
 \usepackage{subcaption}
 \usepackage{xcolor}
+\usepackage{xspace}
+
+\newcommand{\inv}{\texttt{INV\_X4}\xspace}
+\newcommand{\ha}{\texttt{HA\_X1}\xspace}
 
 \title{Digital Microelectronics 2018 \\ Final project report}
 \author{Group 5}
@@ -16,14 +20,23 @@
 \maketitle
 
 \section{Introduction}
+The goal of this final project is to design and characterize two logic gates of a standard cell library. These are in particular an inverter whose transistors have width four times the minimum (\inv in the following), and a half adder (\ha in the following).
+
+The design starts with the schematic drawing, using an available \texttt{.png} image as a reference, which has to be simulated as an initial condition. Then, the layout of the cell must be drawn and the parasitic elements must be extracted from it. Finally, those parasitics must be used for the final characterization in order to fill in the Liberty file of the standard cell library.
 
 \section{Inverter}
+\subsection{Schematic}
+\subsection{Layout}
+\subsection{Characterization}
 
 \section{Half adder}
+\subsection{Schematic}
 
 \subsection{Layout}
 Given that the layout of the half adder is quite more complex than the one of the inverter, we started by deeply analyzing the possible approaches using the pen-and-paper method. The final solution that we found consisted in sharing source/drain diffusions as much as possible, in order to minimize the area in the horizontal direction.
 
 When actually drawing the design in Virtuoso, we made sure of running the Design Rule Checker very often, in order to avoid problems in advance. 
+
+\subsection{Characterization}
 
 \end{document}
