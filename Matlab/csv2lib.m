@@ -28,7 +28,7 @@ mtx_tmp = csvread(fInPath, 1, 0);
 mtx = mtx_tmp(:, 2:2:end);
 
 % convert (time) data to the right output-format (normalize to the UoM specified in the liberty file index)
-mtx_norm = mtx_norm * 10^(-timeUoM);
+mtx_norm = mtx * 10^(-timeUoM);
 
 %% Write the new file
 
