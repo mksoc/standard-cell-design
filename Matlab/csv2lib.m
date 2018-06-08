@@ -28,7 +28,7 @@ mtx_tmp = csvread(fInPath, 1, 0);
 mtx = mtx_tmp(:, 2:2:end);
 
 % convert (time) data to the right output-format (normalize to the UoM specified in the liberty file index)
-mtx = mtx * 10^(-timeUoM);
+mtx_norm = mtx_norm * 10^(-timeUoM);
 
 %% Write the new file
 
@@ -37,13 +37,13 @@ fOutID = fopen(fOutPath, 'w');
 
 % specify the string and write it on the output file
 begStr = 'values ("%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f", \\\n';
-fprintf(fOutID, begStr, mtx(1, :));
+fprintf(fOutID, begStr, mtx_norm(1, :));
 
 formatSpec = '        "%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f", \\\n';
-fprintf(fOutID, formatSpec, mtx(2:end-1, :));
+fprintf(fOutID, formatSpec, mtx_norm(2:end-1, :));
 
 endStr = '        "%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f");*/';
-fprintf(fOutID, endStr, mtx(end, :));
+fprintf(fOutID, endStr, mtx_norm(end, :));
 
 % close the file
 fclose(fOutID);
