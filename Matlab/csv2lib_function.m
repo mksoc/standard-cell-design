@@ -40,7 +40,7 @@ fprintf(fOutID, begStr, mtx_norm(1, :));
 formatSpec = '        "%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f", \\\n';
 fprintf(fOutID, formatSpec, mtx_norm(2:end-1, :));
 
-endStr = '        "%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f");*/';
+endStr = '        "%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f,%1.8f");';
 fprintf(fOutID, endStr, mtx_norm(end, :));
 
 % space for the new csv
