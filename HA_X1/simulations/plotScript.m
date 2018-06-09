@@ -34,7 +34,6 @@ end
 grid on
 title('Output falling 50%-50% propagation delay')
 xlabel('Load Capacitance [fF]')
-disp("PORCO DIO")
 
 figure(4)
 clf

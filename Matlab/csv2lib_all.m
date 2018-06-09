@@ -6,10 +6,12 @@
 %------------- Parameters -------------
 
 % input directory - to end with "/"
-dirInPath = "/home/matteo/git/standard-cell-design/HA_X1/simulations/schematic/25deg/S/";
+% dirInPath = "/home/matteo/git/standard-cell-design/HA_X1/simulations/schematic/25deg/S/";
+dirInPath = "../HA_X1/simulations/wParasitics/25deg/CO/";
 
 % output file path
-fOutPath = "./ready2lib";
+% fOutPath = "./ready2lib";
+fOutPath = dirInPath + "ready2lib.txt";
 
 % specify the Unit of Measurement for time measures (specify the value of the exponent)
 timeUoM = -9; % [nano seconds]
