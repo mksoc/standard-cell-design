@@ -9,15 +9,58 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 \usepackage{xspace}
+\usepackage{fancyhdr}
 
 \newcommand{\inv}{\texttt{INV\_X4}\xspace}
 \newcommand{\ha}{\texttt{HA\_X1}\xspace}
 
 \title{Digital Microelectronics 2018 \\ Final project report}
-\author{Group 5}
+\author{Marco Andorno (247222)\\ Michele Caon (253027) \\ Matteo Perotti (251453)}
 
 \begin{document}
-\maketitle
+
+% INTRO
+\begin{center}
+
+\thispagestyle{empty}
+
+\textbf{\Large Digital Microelectronics}\\[1.0cm]
+\textsc{\Large Politecnico di Torino}\\[0.5cm]
+\textsc{\large Dipartimento di Elettronica e Telecomunicazioni}\\[1cm]
+
+% TITLE
+\huge \textbf{Final Project: \\ Standard Cell layout of an inverter and a half-adder}
+
+\end{center}
+
+% AUTHORS
+\vfill
+\large
+\begin{flushleft}
+\makeatletter
+\emph{Group 5:}\\
+\@author \\
+\vspace{1cm}
+\normalsize Date: \today
+\makeatother
+\end{flushleft}
+
+%\maketitle
+
+\newpage
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\leftmark}
+\lfoot{\thepage}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+% \tableofcontents
+% \newpage
 
 \section{Introduction}
 The goal of this final project is to design and characterize two logic gates of a standard cell library. These are in particular an inverter whose transistors have width four times the minimum (\inv in the following), and a half adder (\ha in the following).
@@ -33,15 +76,15 @@ The design starts with the schematic drawing, using an available \texttt{.png} i
 
 \section{Half adder}
 \subsection{Schematic}
-The schematic was drawn using Virtuoso schematic editor. 
+The schematic was drawn using Virtuoso schematic editor.
 
 \subsection{Layout}
 Given that the layout of the half adder is quite more complex than the one of the inverter, we started by deeply analyzing the possible approaches using the pen-and-paper method. The final solution that we found consisted in sharing source/drain diffusions as much as possible, in order to minimize the area in the horizontal direction.
 
-When actually drawing the design in Virtuoso, we made sure of running the Design Rule Checker very often, in order to avoid problems in advance. 
+When actually drawing the design in Virtuoso, we made sure of running the Design Rule Checker very often, in order to avoid problems in advance.
 
 The design started with the schematic. We tried to put the two outputs on the opposite sides of the cell, because this way the paths input-output are long $\frac{w}{2}$ at maximum, if the inputs are linked
-Il design è stato inizialmente fatto carta e penna, guardando lo schematico disegnato. Si è partiti dall'imporre che i due output fossero ai lati estremi della cella, per fare in modo che i percorsi input-output fossero al massimo circa metà della dimensione orizzontale della cella. Tutto questo perché l'intenzione iniziale era quella di mettere i vias per gli input circa a metà cella. 
+Il design è stato inizialmente fatto carta e penna, guardando lo schematico disegnato. Si è partiti dall'imporre che i due output fossero ai lati estremi della cella, per fare in modo che i percorsi input-output fossero al massimo circa metà della dimensione orizzontale della cella. Tutto questo perché l'intenzione iniziale era quella di mettere i vias per gli input circa a metà cella.
 
 Si è quindi partiti dall'uscita CO per iniziare a disegnare il layout. Abbiamo disegnato il primo nMos dell'inverter e, nell'ottica di condividere il più possibile i sources, abbiamo piazzato il secondo
 
