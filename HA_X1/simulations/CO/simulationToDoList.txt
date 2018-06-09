@@ -1,0 +1,37 @@
+* pin: CO (A and B)
+    - related pin: A when B = 1;
+        + cell fall     "CO_A_B_tp_L.csv"   X
+        + cell rise     "CO_A_B_tp_H.csv"   X
+        + fall trans    "CO_A_B_t_F.csv"   X
+        + rise trans    "CO_A_B_t_R.csv"   X
+
+    - related pin: B when A = 1;
+        + cell fall     "CO_B_A_tp_L.csv"   X
+        + cell rise     "CO_B_A_tp_H.csv"   X
+        + fall trans    "CO_B_A_t_F.csv"   X
+        + rise trans    "CO_B_A_t_R.csv"   X
+
+* pin: S (A xor B)
+    - related pin: A when B = 0;
+        + cell fall     "S_A_notB_tp_L.csv"
+        + cell rise     "S_A_notB_tp_H.csv"
+        + fall trans    "S_A_notB_t_F.csv"
+        + rise trans    "S_A_notB_t_R.csv"
+
+    - related pin: A when B = 1;
+        + cell fall     "S_A_B_tp_L.csv"
+        + cell rise     "S_A_B_tp_H.csv"
+        + fall trans    "S_A_B_t_F.csv"
+        + rise trans    "S_A_B_t_R.csv"
+
+    - related pin: B when A = 0;
+        + cell fall     "S_B_notA_tp_L.csv"
+        + cell rise     "S_B_notA_tp_H.csv"
+        + fall trans    "S_B_notA_t_F.csv"
+        + rise trans    "S_B_notA_t_F.csv"
+
+    - related pin: B when A = 1;
+        + cell fall     "S_B_A_tp_L.csv"
+        + cell rise     "S_B_A_tp_H.csv"
+        + fall trans    "S_B_A_t_F.csv"
+        + rise trans    "S_B_A_t_R.csv"
