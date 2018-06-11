@@ -69,6 +69,27 @@ The design starts with the schematic drawing, using an available \texttt{.png} i
 
 \section{Inverter}
 \subsection{Schematic}
+Starting from the schematic of the available \texttt{.png} (figure \ref{fig:inv_png}), we copied it using Virtuoso Schematic Editor, obtaining the result shown in figure \ref{fig:inv_schematic}. Note that the four PMOS and NMOS transistors in parallel will be just one large transistor in the layout.
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=1.2\linewidth]{../INV_X4/INV_X4.png}
+	\caption{Reference schematic of the inverter}
+	\label{fig:inv_png}
+\end{figure}
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/INV_X4_schematic.png}
+	\caption{Final schematic of \inv}
+	\label{fig:inv_schematic}
+\end{figure}
+
+We then carried out some preliminary simulations using a test bench, to confirm that the circuit works correctly. We measured rise and fall times, as well as propagation delays, that will be compared with the actual characterization later on. We also measured the transfer characteristic, shown in figure \ref{fig:inv_tchar}.
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=.7\linewidth]{../INV_X4/INV_X4_transfer_char.pdf}
+	\caption{Inverter transfer characteristic}
+	\label{fig:inv_tchar}
+\end{figure}
 
 
 \subsection{Layout}
