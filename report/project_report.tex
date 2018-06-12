@@ -70,13 +70,13 @@ The design starts with the schematic drawing, using an available \texttt{.png} i
 \section{Inverter}
 \subsection{Schematic}
 Starting from the schematic of the available \texttt{.png} (figure \ref{fig:inv_png}), we copied it using Virtuoso Schematic Editor, obtaining the result shown in figure \ref{fig:inv_schematic}. Note that the four PMOS and NMOS transistors in parallel will be just one large transistor in the layout.
-\begin{figure}[hbtp]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1.2\linewidth]{../INV_X4/INV_X4.png}
 	\caption{Reference schematic of the inverter}
 	\label{fig:inv_png}
 \end{figure}
-\begin{figure}[hbtp]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../INV_X4/INV_X4_schematic.png}
 	\caption{Final schematic of \inv}
@@ -84,7 +84,7 @@ Starting from the schematic of the available \texttt{.png} (figure \ref{fig:inv_
 \end{figure}
 
 We then carried out some preliminary simulations using a test bench, to confirm that the circuit works correctly. We measured rise and fall times, as well as propagation delays, that will be compared with the actual characterization later on. We also measured the transfer characteristic, shown in figure \ref{fig:inv_tchar}.
-\begin{figure}[hbtp]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\linewidth]{../INV_X4/INV_X4_transfer_char.pdf}
 	\caption{Inverter transfer characteristic}
@@ -99,17 +99,53 @@ We then carried out some preliminary simulations using a test bench, to confirm 
 \subsection{Schematic}
 The schematic was drawn using Virtuoso schematic editor.
 
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_schematic.png}
+\caption{HAX1 schematic}
+\label{fig: HAX1_sch}
+\end{figure}
+
 \subsection{Layout}
 Given that the layout of the half adder is quite more complex than the one of the inverter, we started by deeply analyzing the possible approaches using the pen-and-paper method. The final solution that we found consisted in sharing source/drain diffusions as much as possible, in order to minimize the area in the horizontal direction.
 
 When actually drawing the design in Virtuoso, we made sure of running the Design Rule Checker very often, in order to avoid problems in advance.
 
-The design started with the schematic. We tried to put the two outputs on the opposite sides of the cell, because this way the paths input-output are long $\frac{w}{2}$ at maximum, if the inputs are linked
-Il design è stato inizialmente fatto carta e penna, guardando lo schematico disegnato. Si è partiti dall'imporre che i due output fossero ai lati estremi della cella, per fare in modo che i percorsi input-output fossero al massimo circa metà della dimensione orizzontale della cella. Tutto questo perché l'intenzione iniziale era quella di mettere i vias per gli input circa a metà cella.
+Layout design started looking at the schematic. First of all we tried to put the two outputs on the opposite sides of the cell, because this way, if the input are brought over it in the middle with the \texttt{metal 2} and linked with vias, the input-output paths are more probably balanced in length. 
+Thus we started drawing on a paper the first nMos of the inverter whose output was CO. With a view to share the sources/drains as much as possible we began putting all the transistors one near the other drawing only the strictly necessary metal.
+We used different colours to have an easier readability and go on drawing only the \texttt{metal} for the sources/drains and the \texttt{polysilicon} for the gates until the end of the port and left the routing last. Then we completed the layout linking together the various elements coherently with the schematic view.
 
-Si è quindi partiti dall'uscita CO per iniziare a disegnare il layout. Abbiamo disegnato il primo nMos dell'inverter e, nell'ottica di condividere il più possibile i sources, abbiamo piazzato il secondo
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/layout_drw.png}
+\caption{First sketch of the layout. Blue: metal1, red: polysilicon. Labels are not related with the position of the corresponding via.}
+\label{fig: lay_drw}
+\end{figure}
 
+Then we converted this sketch in a real layout design using the Virtuoso embedded layout editor. During our sessions we paid attention to reduce every distance to the minimum with the aid of the meter tool and in accordance with the Design Rules. We made a lot of effort to have a cell with the minimum area because the area is directly linked to the yield of the process and to logic ports density, capacitance and therefore delay and power cost per commutation. The less is the area, the more ports can stay in a chip or the more the chip will be small, and it is harder to find defects on a single chip if it is small, because the density of the defects per unit area is about constant (higher yield for the process). The delay and the power costs rise with the area because if more material is used, more resistance/capacitance is added. For this reason we also tried to reduce the length of every wire.
+
+The height of the cell is fixed because this is a standard cell. The top and the ground of it are made of metal which has to feed the transistors. Many entity like this one can be put one next to the other to form a line of cells packed together and fed with global Val-GND voltages. This way it is simpler to reach every port with its supply.
+
+When we drew the layout with the editor we changed a little bit the connections. Instead of putting a single wire of \texttt{polysilicon} to connect each gate with the related input A/B, we used vias and \texttt{metal1}. It would have been interesting to compare the performances of two implementations.
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_poly-metal_layout.png}
+\caption{HAX1 layout, more metal1 and vias on pull-down connections}
+\label{fig: HAX1_lay_drw}
+\end{figure}
+
+In the pull up network the advantage of putting \texttt{metal1} seems to be huge, whereas in the pull down network it's not so clear. We present here another possible implementation. For time reasons we have characterized only the first one, though.
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_poly_layout.png}
+\caption{HAX1 layout, more polysilicon on pull-down connections}
+\label{fig: HAX1_layPoly_drw}
+\end{figure}
 
 \subsection{Characterization}
+
+
 
 \end{document}
