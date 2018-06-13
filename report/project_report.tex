@@ -126,6 +126,69 @@ Just a note on the warning that says that nets \texttt{GND!} and \texttt{VDD!} a
 
 
 \subsection{Characterization}
+The first step toward the complete characterization of our logic gate was the extraction of the parasitic elements from the layout. To do this, we ran the PEX tool from the layout editor and got the following report as well as a complete new netlist that takes into account those parasitics in the schematic.
+\verbfilenobox[\small]{../INV_X4/INV_X4.pex.report}
+
+Then, we generated a new config view for our cell and linked it to the calibre view, which contains the aforementioned netlist with the parasitics. We then set up the old test bench to use this new view and ran the automatic simulations needed to compile the Liberty file and compare with the schematic simulations. 
+
+In order to fill in the Liberty file faster we developed a Matlab script that convert the traces exported in \texttt{.csv} from Virtuoso into the correct format for the \texttt{.lib} file, which is shown in the following snippet:
+\verbfilenobox[\small]{../INV_X4/INV_X4.lib}
+
+We also developed another Matlab script to plot the results of the simulations, shown in the following figures.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/t_F.pdf}
+	\caption{Fall time vs load capacitance, higher curves are for longer input rise times.}
+	\label{fig:inv_t_F}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/t_R.pdf}
+	\caption{Rise time vs load capacitance, higher curves are for longer input fall times.}
+	\label{fig:inv_t_R}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/tp_L.pdf}
+	\caption{Falling propagation delay vs load capacitance, higher curves are for longer input rise times.}
+	\label{fig:inv_tp_L}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/tp_H.pdf}
+	\caption{Rising propagation delay vs load capacitance, higher curves are for longer input fall times.}
+	\label{fig:inv_tp_H}
+\end{figure}
+
+We also compared these results with the simulation done on the original schematic, computing the relative difference in the measured parameters for a given input delay (different input delay values gave similar results and thus were not meaningful to show).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/t_F_diff.pdf}
+	\caption{Relative fall time difference vs load capacitance}
+	\label{fig:inv_t_F_diff}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/t_R_diff.pdf}
+	\caption{Relative rise time difference vs load capacitance}
+	\label{fig:inv_t_R_diff}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/tp_L_diff.pdf}
+	\caption{Relative falling propagation delay difference vs load capacitance}
+	\label{fig:inv_tp_L_diff}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/simulations/tp_H_diff.pdf}
+	\caption{Relative rising propagation delay difference vs load capacitance}
+	\label{fig:inv_tp_H_diff}
+\end{figure}
+
+We can note that for very small load capacitance values the simulations done on the extracted parasitics show steadily longer delays, from 20\% to 45\% longer than the schematic-only simulations. This is easily explained by the fact that the parasitic elements have a bigger impact on performance when the load capacitance is very small, while for large values of load capacitance its effect becomes dominant and the weight of the parasitic contributions drastically reduces.
+
+The case of the rising propagation delay is a bit different in that it shows a very large difference between simulations for small load capacitance values: greater that 100\%. This behavior has shown to be consistent among different measurements and tests, but we could not really explain why it shows up, as we expected rising and falling delays to be more or less symmetrical.
 
 \section{Half adder}
 \subsection{Schematic}
