@@ -10,6 +10,8 @@
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\usepackage{verbatimbox}
 
 \newcommand{\inv}{\texttt{INV\_X4}\xspace}
 \newcommand{\ha}{\texttt{HA\_X1}\xspace}
@@ -67,9 +69,18 @@ The goal of this final project is to design and characterize two logic gates of 
 
 The design starts with the schematic drawing, using an available \texttt{.png} image as a reference, which has to be simulated as an initial condition. Then, the layout of the cell must be drawn and the parasitic elements must be extracted from it. Finally, those parasitics must be used for the final characterization in order to fill in the Liberty file of the standard cell library.
 
+The files for these two gates are inside the following paths:
+\begin{equation*}
+	\texttt{/home/md18.5/project/INV\_X4}
+\end{equation*}
+and
+\begin{equation*}
+	\texttt{/home/md18.5/project/HAX1}
+\end{equation*}
+
 \section{Inverter}
 \subsection{Schematic}
-Starting from the schematic of the available \texttt{.png} (figure \ref{fig:inv_png}), we copied it using Virtuoso Schematic Editor, obtaining the result shown in figure \ref{fig:inv_schematic}. Note that the four PMOS and NMOS transistors in parallel will be just one large transistor in the layout.
+Starting from the schematic of the available \texttt{.png} (figure \ref{fig:inv_png}), we copied it using Virtuoso Schematic Editor, obtaining the result shown in figure \ref{fig:inv_schematic}. Note that the four PMOS and NMOS transistors in parallel will be just one large transistor in the layout, with the source/drain diffusions fingered.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.2\linewidth]{../INV_X4/INV_X4.png}
@@ -91,8 +102,29 @@ We then carried out some preliminary simulations using a test bench, to confirm 
 	\label{fig:inv_tchar}
 \end{figure}
 
-
 \subsection{Layout}
+The final layout of \inv is shown in figure \ref{fig:inv_layout}. The main trick to note here is how we used transistor fingering extensively, by sharing as much as possible source and drain diffusions. This is generally done in order to reduce the total area of the standard cell, but in this case it was actually mandatory, because a single transistor large 4 times the minimum width would not fit inside the well height.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../INV_X4/INV_X4_layout.png}
+	\caption{Layout of \inv}
+	\label{fig:inv_layout}
+\end{figure}
+
+For PMOS transistors we were forced to finger four different transistor, while regarding the NMOS, probably, two fingered transistors with double width would have fit, but we decided to go with four single width transistors anyway to improve symmetry.
+
+Regarding pins, the output \texttt{ZN} did not cause any troubles and was placed on the rightmost metal strip connecting the drains of the PMOS and NMOS. As for the input \texttt{A}, instead, our first idea had been to place its via in the middle of the horizontal polysilicon strip, but then we noted that this way the external connections to that pin would have needed to cross the metal 1 layer, thus requiring metal 2 to be used instead. So eventually we settled with placing the via for the input on the leftmost part of the polysilicon, that does not force any metal 1 crossing and also more accurately reflects the topology of the schematic.
+
+After having completed the layout, and actually many times during its development, we ran the DRC which reported the following final statement:
+\newpage
+\verbfilenobox[\small]{../INV_X4/INV_X4.drc.summary}
+\newpage
+Moreover, we compared layout and schematic netlists by using LVS, that succeeded on the first try with its reassuring smiley face:
+\verbfilenobox[\small]{../INV_X4/INV_X4.lvs.report}
+
+Just a note on the warning that says that nets \texttt{GND!} and \texttt{VDD!} are present in the layout but missing in the source (schematic). We tried to follow the steps of the laboratory sessions where the supply nets had the exclamation mark at the end in the layout view but not in the schematic one, and in fact we had no problems with this method for the \inv. However, we had a lot of issues for \ha when running LVS as it complained about missing power nets. We finally came to the conclusion that schematic and layout must have the exact same names for supply nets and that the exclamation mark can be avoided if the schematic does not exploit global nets to make the drawing cleaner and clearer. Even then, to this day it remains unclear why the inverter cell worked just as well with different names for power nets (disregarding this warning), while the half adder with the same setup caused so much trouble. We can only accept this and give in to the mighty secrets of Virtuoso.
+
+
 \subsection{Characterization}
 
 \section{Half adder}

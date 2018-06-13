@@ -52,93 +52,9 @@ CALIBRE VERSION:          v2011.4_14.13    Tue Nov 15 15:18:31 PST 2011
 
 
 o LVS Setup:
-
-   LVS COMPONENT TYPE PROPERTY            element
-   LVS COMPONENT SUBTYPE PROPERTY         model
-   // LVS PIN NAME PROPERTY
-   LVS POWER NAME                         "VDD"
-   LVS GROUND NAME                        "VSS" "GROUND"
-   LVS CELL SUPPLY                        NO
-   LVS RECOGNIZE GATES                    ALL
-   LVS IGNORE PORTS                       NO
-   LVS CHECK PORT NAMES                   NO
-   LVS IGNORE TRIVIAL NAMED PORTS         NO
-   LVS BUILTIN DEVICE PIN SWAP            YES
-   LVS ALL CAPACITOR PINS SWAPPABLE       NO
-   LVS DISCARD PINS BY DEVICE             NO
-   LVS SOFT SUBSTRATE PINS                NO
-   LVS INJECT LOGIC                       YES
-   LVS EXPAND UNBALANCED CELLS            YES
-   LVS FLATTEN INSIDE CELL                NO
-   LVS EXPAND SEED PROMOTIONS             NO
-   LVS PRESERVE PARAMETERIZED CELLS       NO
-   LVS GLOBALS ARE PORTS                  YES
-   LVS REVERSE WL                         NO
-   LVS SPICE PREFER PINS                  NO
-   LVS SPICE SLASH IS SPACE               YES
-   LVS SPICE ALLOW FLOATING PINS          YES
-   // LVS SPICE ALLOW INLINE PARAMETERS     
-   LVS SPICE ALLOW UNQUOTED STRINGS       NO
-   LVS SPICE CONDITIONAL LDD              NO
-   LVS SPICE CULL PRIMITIVE SUBCIRCUITS   NO
-   LVS SPICE IMPLIED MOS AREA             NO
-   // LVS SPICE MULTIPLIER NAME
-   LVS SPICE OVERRIDE GLOBALS             NO
-   LVS SPICE REDEFINE PARAM               NO
-   LVS SPICE REPLICATE DEVICES            NO
-   LVS SPICE SCALE X PARAMETERS           NO
-   LVS SPICE STRICT WL                    NO
-   // LVS SPICE OPTION
-   LVS STRICT SUBTYPES                    NO
-   LVS EXACT SUBTYPES                     NO
-   LAYOUT CASE                            NO
-   SOURCE CASE                            NO
-   LVS COMPARE CASE                       NO
-   LVS DOWNCASE DEVICE                    NO
-   LVS REPORT MAXIMUM                     50
-   LVS PROPERTY RESOLUTION MAXIMUM        32
-   // LVS SIGNATURE MAXIMUM
-   // LVS FILTER UNUSED OPTION
-   // LVS REPORT OPTION
-   LVS REPORT UNITS                       YES
-   // LVS NON USER NAME PORT
-   // LVS NON USER NAME NET
-   // LVS NON USER NAME INSTANCE
-
-   // Reduction
-
-   LVS REDUCE SERIES MOS                  YES
-   LVS REDUCE PARALLEL MOS                YES
-   LVS REDUCE SEMI SERIES MOS             YES
-   LVS REDUCE SPLIT GATES                 YES
-   LVS REDUCE PARALLEL BIPOLAR            YES
-   LVS REDUCE SERIES CAPACITORS           YES
-   LVS REDUCE PARALLEL CAPACITORS         YES
-   LVS REDUCE SERIES RESISTORS            YES
-   LVS REDUCE PARALLEL RESISTORS          YES
-   LVS REDUCE PARALLEL DIODES             YES
-   LVS REDUCTION PRIORITY                 PARALLEL
-   
-   LVS SHORT EQUIVALENT NODES             NO
-
-   // Trace Property
-
-   TRACE PROPERTY  mn(nmos_vtl)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_vtl)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vtl)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vtl)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_vth)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_vth)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vth)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vth)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_vtg)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_vtg)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vtg)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_vtg)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_thkox)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mn(nmos_thkox)  w w 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_thkox)  l l 4e-09 ABSOLUTE
-   TRACE PROPERTY  mp(pmos_thkox)  w w 4e-09 ABSOLUTE
+.
+.
+.
 
 
 
