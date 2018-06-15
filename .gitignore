@@ -4,4 +4,5 @@
 *.fls
 *.fdb*
 *.toc
+*.out
 *.m~
