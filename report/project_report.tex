@@ -201,6 +201,7 @@ The case of the rising propagation delay is a bit different in that it shows a v
 
 \section{Half adder}
 \subsection{Schematic}
+<<<<<<< HEAD
 The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_sch}), following the reference \texttt{.png} shown in figure \ref{fig: HAX1_png}.
 
 \begin{figure}[H]
@@ -208,12 +209,39 @@ The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_s
 	\caption{Reference schematic of the half-adder}
 	\label{fig: HAX1_png}
 \end{figure}
+=======
+The schematic was drawn using Virtuoso schematic editor. We used the following .png file as reference.
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HA_X1.png}
+\caption{HAX1 schematic-source}
+\label{fig: HAX1_sch_sc}
+\end{figure}
+
+Even though the 2-1 AOI has the pull up net with a series pMos connected through the power supply and two pMos in parallel, we decided to switch the two subnets to obtain better perfomances. There are two main reasons for this choice:
+\begin{enumerate}
+\item If A and B are both at '0' and x1 is at '1', the intermediate node is discharged. When a transition of x1 happens then the node has to be charged from only one $R_{eq}$. With two pMos between the supply and the other transistor the situation could be hypotetically better: in the worst case we could have the same situation as before, but if both A and B are asserted then the capacitance takes less time to complete the charging.  
+\item The capacitance of the intermidiate node is greater if there are 2 pMos before the output instead of one.
+\end{enumerate}
+
+We report here the final schematic used to create the layout.
+>>>>>>> f7faa04fc7b7c1117da879bf7a5786b0138803b3
 
 \begin{figure}[H]
       \centering
        \includegraphics[width=\linewidth]{./Images/HA/HAX1_schematic.png}
 \caption{HAX1 schematic}
 \label{fig: HAX1_sch}
+\end{figure}
+
+We created a testbench and simulated the circuit as we did for the inverter. Everything was correct.
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_TB_schematic.png}
+\caption{HAX1 testbench}
+\label{fig: HAX1_tb}
 \end{figure}
 
 \subsection{Layout}
@@ -257,6 +285,39 @@ When we drew the layout with the editor we changed a little bit the connections.
 \end{figure}
 
 Notice how the final layout in figure \ref{fig: polymetal} appears divided in two different active region both for the NMOS and PMOS networks. This is necessary whenever two metal lines are connected to the active region without a gate between them. In fact, during the manufacturing process, the polysilicon layer is lay before the active one. Therefore, the gates prevent the active regions to extend below them, even if the layout masks do. This automatically isolates the drain and source implants and the related metal lines. When no gate is lay between two metal lines, the isolation must be considered as part of the active layer mask. In the early stages of the development this wasn't clear to us, as proved by figure \ref{fig:poly}.
+
+Finally we launched the LVS and then extracted the parasitic elements. The PEX operation gave us a schematic with all the MOS with the relative parasitics. The net is implicit because no wire is drawn, but every terminal has its own reference. The following figures show the group of the 16 MOS of the cell, a detail of one MOS to highlight the labels on the terminals and a parasitic capacitance between the drain of that MOS and gnd. 
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_PEX.png}
+\caption{Detail of the extracted parasitics - group of MOS}
+\label{fig: PEX0}
+\end{figure}
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_PEX_1.png}
+\caption{Detail of the extracted parasitics - MOS M2}
+\label{fig: PEX1}
+\end{figure}
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_PEX_2.png}
+\caption{One parasitic capacitance, between the drain of M2 and gnd}
+\label{fig: PEX2}
+\end{figure}
+
+Every reference can be spotted looking at the schematic and at the relative file. The PEX produced also the report and the netlist files. In the netlist all the informations about the net with the parasitics can be found. For example here we report the part related with the previous pictures.
+
+\begin{figure}[H]
+      \centering
+       \includegraphics[width=12cm]{./Images/HA/HAX1_PEX_netlist.png}
+\caption{Part of the file 'HA-X1.pex.netlist'}
+\label{fig: PEX0_netlist}
+\end{figure}
+
 
 \subsection{Characterization}
 As done before, we proceeded with the lumped parameters extraction from the designed layout using the PEX tool. Again, the output log and schematic listed all the extracted resistances and capacitances similarly to what has been reported for the \inv in section \ref{sec: inv_char}. From the extracted data we created a new cell configuration (\texttt{config} view) for the \ha. At this point we created a new testbench cell, where we imported our \ha as DUT. Two pulse generators and two load capacitors with parametric values completed the testbench along with the $V_{DD}$ and $GND$ ports.
