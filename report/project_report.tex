@@ -201,7 +201,6 @@ The case of the rising propagation delay is a bit different in that it shows a v
 
 \section{Half adder}
 \subsection{Schematic}
-<<<<<<< HEAD
 The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_sch}), following the reference \texttt{.png} shown in figure \ref{fig: HAX1_png}.
 
 \begin{figure}[H]
@@ -209,24 +208,14 @@ The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_s
 	\caption{Reference schematic of the half-adder}
 	\label{fig: HAX1_png}
 \end{figure}
-=======
-The schematic was drawn using Virtuoso schematic editor. We used the following .png file as reference.
-
-\begin{figure}[H]
-      \centering
-       \includegraphics[width=12cm]{./Images/HA/HA_X1.png}
-\caption{HAX1 schematic-source}
-\label{fig: HAX1_sch_sc}
-\end{figure}
 
 Even though the 2-1 AOI has the pull up net with a series pMos connected through the power supply and two pMos in parallel, we decided to switch the two subnets to obtain better perfomances. There are two main reasons for this choice:
 \begin{enumerate}
-\item If A and B are both at '0' and x1 is at '1', the intermediate node is discharged. When a transition of x1 happens then the node has to be charged from only one $R_{eq}$. With two pMos between the supply and the other transistor the situation could be hypotetically better: in the worst case we could have the same situation as before, but if both A and B are asserted then the capacitance takes less time to complete the charging.  
+\item If A and B are both at '0' and x1 is at '1', the intermediate node is discharged. When a transition of x1 happens then the node has to be charged from only one $R_{eq}$. With two pMos between the supply and the other transistor the situation could be hypotetically better: in the worst case we could have the same situation as before, but if both A and B are asserted then the capacitance takes less time to complete the charging.
 \item The capacitance of the intermidiate node is greater if there are 2 pMos before the output instead of one.
 \end{enumerate}
 
 We report here the final schematic used to create the layout.
->>>>>>> f7faa04fc7b7c1117da879bf7a5786b0138803b3
 
 \begin{figure}[H]
       \centering
@@ -286,7 +275,7 @@ When we drew the layout with the editor we changed a little bit the connections.
 
 Notice how the final layout in figure \ref{fig: polymetal} appears divided in two different active region both for the NMOS and PMOS networks. This is necessary whenever two metal lines are connected to the active region without a gate between them. In fact, during the manufacturing process, the polysilicon layer is lay before the active one. Therefore, the gates prevent the active regions to extend below them, even if the layout masks do. This automatically isolates the drain and source implants and the related metal lines. When no gate is lay between two metal lines, the isolation must be considered as part of the active layer mask. In the early stages of the development this wasn't clear to us, as proved by figure \ref{fig:poly}.
 
-Finally we launched the LVS and then extracted the parasitic elements. The PEX operation gave us a schematic with all the MOS with the relative parasitics. The net is implicit because no wire is drawn, but every terminal has its own reference. The following figures show the group of the 16 MOS of the cell, a detail of one MOS to highlight the labels on the terminals and a parasitic capacitance between the drain of that MOS and gnd. 
+Finally we launched the LVS and then extracted the parasitic elements. The PEX operation gave us a schematic with all the MOS with the relative parasitics. The net is implicit because no wire is drawn, but every terminal has its own reference. The following figures show the group of the 16 MOS of the cell, a detail of one MOS to highlight the labels on the terminals and a parasitic capacitance between the drain of that MOS and gnd.
 
 \begin{figure}[H]
       \centering
@@ -329,7 +318,7 @@ At this point we were ready to perform the simulations required to fill the timi
 	\item \textbf{Sum} The \texttt{S} generation network is a \texttt{XOR} gate. Its output can thus switch whenever the inputs change from being equal to being different and viceversa. Therefore sixteen measurements are required. It is important to notice that unlike \texttt{CO}, this output shows an inverting behaviour with respect to the related input when the other input is high.
 \end{itemize}
 
-Having set properly the measurement parameters in the ADE L simulation environment we ran the parametric simulation with the same input transition times and load capacitance values used for the \inv. 
+Having set properly the measurement parameters in the ADE L simulation environment we ran the parametric simulation with the same input transition times and load capacitance values used for the \inv.
 
 
 \end{document}
