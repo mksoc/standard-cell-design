@@ -27,6 +27,10 @@ mtx = mtx_tmp(:, 2:2:end);
 % convert (time) data to the right output-format (normalize to the UoM specified in the liberty file index)
 mtx_norm = mtx * 10^(-timeUoM);
 
+% MIC: swap rows and columns in order to have constant tr/tf on the same
+% row and constant load capacitance on the same column
+mtx_norm = mtx_norm';
+
 %% Write current matrix on the new file
 
 % specify the string and write it on the output file
