@@ -7,7 +7,7 @@
 
 % input directory - to end with "/"
 % dirInPath = "/home/matteo/git/standard-cell-design/HA_X1/simulations/schematic/25deg/S/";
-dirInPath = "../HA_X1/simulations/wParasitics/25deg/S/";
+dirInPath = "../INV_X4/simulations/";
 
 % output file path
 % fOutPath = "./ready2lib";
