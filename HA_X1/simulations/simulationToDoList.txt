@@ -35,3 +35,6 @@
         + cell rise     "S_B_A_tp_H.csv"        X
         + fall trans    "S_B_A_t_F.csv"         X
         + rise trans    "S_B_A_t_R.csv"         X
+
+Report comments:
+    - Rise times and rising propagation delays are always greater than falling ones.
