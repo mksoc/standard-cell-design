@@ -2,11 +2,14 @@ clearvars
 close all
 clc
 
+currDir = "../INV_X4/simulations/";
+ranges = [0 65 0 45];
+
 %% Read .csv simulation files
-t_F = csvread('t_F.csv', 1, 0);
-t_R = csvread('t_R.csv', 1, 0);
-tp_L = csvread('tp_L.csv', 1, 0);
-tp_H = csvread('tp_H.csv', 1, 0);
+t_F = csvread(currDir + "t_F.csv", 1, 0);
+t_R = csvread(currDir + "t_R.csv", 1, 0);
+tp_L = csvread(currDir + "tp_L.csv", 1, 0);
+tp_H = csvread(currDir + "tp_H.csv", 1, 0);
 
 %% Plot graphs
 figure(1)
@@ -18,7 +21,8 @@ end
 grid on
 ylabel('Output 70%-30% falling time [ps]')
 xlabel('Load Capacitance [fF]')
-exportPdf(gcf,'t_F.pdf')
+axis(ranges)
+exportPdf(gcf, currDir + "t_F.pdf")
 
 figure(2)
 clf
@@ -29,7 +33,8 @@ end
 grid on
 ylabel('Output 30%-70% rising time [ps]')
 xlabel('Load Capacitance [fF]')
-exportPdf(gcf,'t_R.pdf')
+axis(ranges)
+exportPdf(gcf, currDir + "t_R.pdf")
 
 figure(3)
 clf
@@ -40,7 +45,8 @@ end
 grid on
 ylabel('Output falling 50%-50% propagation delay [ps]')
 xlabel('Load Capacitance [fF]')
-exportPdf(gcf,'tp_L.pdf')
+axis(ranges)
+exportPdf(gcf, currDir + "tp_L.pdf")
 
 figure(4)
 clf
@@ -51,4 +57,5 @@ end
 grid on
 ylabel('Output rising 50%-50% propagation delay [ps]')
 xlabel('Load Capacitance [fF]')
-exportPdf(gcf,'tp_H.pdf')
+axis(ranges)
+exportPdf(gcf, currDir + "tp_H.pdf")
