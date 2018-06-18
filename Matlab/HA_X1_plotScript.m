@@ -82,7 +82,7 @@ ylabel('tp [ps]')
 legend(input_tr_str, 'Location', 'southeast');
 xlim(xRange)
 ylim(yRange)
-exportPdf(gcf, reportPicDir + "S_tp_L.pdf")
+exportPdf(gcf, reportPicDir + "tp_L.pdf")
 
 % Fall transition time with parasitics
 figure(2)
@@ -98,7 +98,7 @@ ylabel('tf [ps]')
 legend(input_tr_str, 'Location', 'southeast');
 xlim(xRange)
 ylim([0 120])
-exportPdf(gcf, reportPicDir + "S_t_F.pdf")
+exportPdf(gcf, reportPicDir + "t_F.pdf")
 
 %% Compute differences
 
