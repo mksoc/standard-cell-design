@@ -128,24 +128,24 @@ The final layout of \inv is shown in figure \ref{fig:inv_layout}. The main trick
 
 For PMOS transistors we were forced to finger four different transistor, while regarding the NMOS, probably, two fingered transistors with double width would have fit, but since the cell width would have been the same, we decided to go with four single width transistors anyway to improve symmetry.
 
-Regarding pins, the output \texttt{ZN} did not cause any troubles and was placed on the rightmost metal strip connecting the drains of the PMOS and NMOS. As for the input \texttt{A}, instead, our first idea had been to place its via in the middle of the horizontal polysilicon strip, but then we noticed that this way the external connections to that pin would cross the \texttt{metal1} layer, thus requiring \texttt{metal2} to be used instead. So eventually we settled with placing the via for the input on the leftmost part of the polysilicon, avoiding any \texttt{metal1} crossing and also accurately refletting the topology of the schematic.
+Regarding pins, the output \texttt{ZN} did not cause any troubles and was placed on the rightmost metal strip connecting the drains of the PMOS and NMOS. As for the input \texttt{A}, instead, our first idea had been to place its via in the middle of the horizontal poly-silicon strip, but then we noticed that this way the external connections to that pin would cross the \texttt{metal1} layer, thus requiring \texttt{metal2} to be used instead. So eventually we settled with placing the via for the input on the leftmost part of the poly-silicon, avoiding any \texttt{metal1} crossing and also accurately mirroring the topology of the schematic.
 
 While developing the layout we ran the DRC tool many times to ensure all the design rules were met. After completing it we got the following final statement:
 \newpage
 \verbfilenobox[\small]{../INV_X4/INV_X4.drc.summary}
 \newpage
-Moreover, we compared the layout and the schematic netlists using LVS, that succeeded on the first try with its reassuring smiling smiley-face:
+Moreover, we compared the layout and the schematic net-lists using LVS, that succeeded on the first try with its reassuring smiling smiley-face:
 \verbfilenobox[\small]{../INV_X4/INV_X4.lvs.report}
 
-Just a remark on the warning that says that nets \texttt{GND!} and \texttt{VDD!} are present in the layout but missing in the source (schematic). We tried to follow the steps of the laboratory sessions where the supply nets had the exclamation mark at the end in the layout view but not in the schematic one, and in fact we had no problems with this method for the \inv. However, we had a lot of issues for \ha when running LVS as it complained about missing power nets. We finally came to the conclusion that schematic and layout must have the exact same names for supply nets and that the exclamation mark can be avoided if the schematic does not exploit global nets to make the drawing cleaner and clearer. Even then, to this day it remains unclear why the inverter cell worked just as well with different names for power nets (disregarding this warning), while the half adder with the same setup caused so much trouble. We can only accept this and give in to the mighty secrets of Virtuoso.
+Just a remark on the warning that says that nets \texttt{GND!} and \texttt{VDD!} are present in the layout but missing in the source (schematic). We tried to follow the steps of the laboratory sessions where the supply nets had the exclamation mark at the end in the layout view but not in the schematic one, and in fact we had no problems with this method for the \inv. However, we had a lot of issues for \ha when running LVS as it complained about missing power nets. We finally came to the conclusion that schematic and layout must have the exact same names for supply nets and that the exclamation mark can be avoided if the schematic does not exploit global nets to make the drawing cleaner and clearer. Even then, to this day it remains unclear why the inverter cell worked just as well with different names for power nets (disregarding this warning), while the half adder with the same set-up caused so much trouble. We can only accept this and give in to the mighty secrets of Virtuoso.
 
 
 \subsection{Characterization}
 \label{sec: inv_char}
-The first step toward the complete characterization of our logic gate was the extraction of the parasitic elements from the layout. To do this, we ran the PEX tool from the layout editor and got the following report as well as a complete new netlist that takes into account those parasitics in the schematic.
+The first step toward the complete characterization of our logic gate was the extraction of the parasitic elements from the layout. To do this, we ran the PEX tool from the layout editor and got the following report as well as a complete new net-list that takes into account those parasitics in the schematic.
 \verbfilenobox[\small]{../INV_X4/INV_X4.pex.report}
 
-Then, we generated a new config view for our cell and linked it to the calibre view, which contained the aforementioned netlist with the parasitics. We then set up the old test bench to use this new view and ran the automatic simulations needed to compile the Liberty file and to perform the comparison with the schematic simulations.
+Then, we generated a new \texttt{config} view for our cell and linked it to the calibre view, which contained the aforementioned net-list with the parasitics. We then set up the old test bench to use this new view and ran the automatic simulations needed to compile the Liberty file and to perform the comparison with the schematic simulations.
 
 In order to fill in the Liberty file faster we developed a Matlab script that converts the traces exported in \texttt{.csv} from Virtuoso into a suitable format for the \texttt{INV\_X4.lib} file. As already mentioned in section \ref{sec:intro}, this file can be found in the report directory on GitHub or on the server.
 %\verbfilenobox[\small]{../INV_X4/INV_X4.lib}
@@ -215,10 +215,10 @@ The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_s
 	\label{fig: HAX1_png}
 \end{figure}
 
-Even though the AOI21 gate has the pull-up network made of a series PMOS connected through the power supply and two PMOS in parallel, we decided to switch the two subnets to obtain better perfomances. There are two main reasons for this choice:
+Even though the AOI21 gate has the pull-up network made of a series PMOS connected through the power supply and two PMOS in parallel, we decided to switch the two subnets to obtain better performances. There are two main reasons for this choice:
 \begin{enumerate}
-\item If A and B are both at '0' and x1 is at '1', the intermediate node is discharged. When a transition of x1 happens then the node has to be charged from only one $R_{eq}$. With two PMOS between the supply and the other transistor the situation could be hypotetically better: in the worst case we could have the same situation as before, but if both A and B are asserted then the capacitance takes less time to complete the charging.
-\item The capacitance of the intermidiate node is greater if there are 2 PMOS before the output instead of one.
+\item If A and B are both at '0' and x1 is at '1', the intermediate node is discharged. When a transition of x1 happens then the node has to be charged from only one $R_{eq}$. With two PMOS between the supply and the other transistor the situation could be hypothetically better: in the worst case we could have the same situation as before, but if both A and B are asserted then the capacitance takes less time to complete the charging.
+\item The capacitance of the intermediate node is greater if there are 2 PMOS before the output instead of one.
 \end{enumerate}
 
 We report here the final schematic used to create the layout.
@@ -240,18 +240,18 @@ At this point we created a new testbench and we simulated the circuit schematic 
 \end{figure}
 
 \subsection{Layout}
-Given that the layout of the half adder is quite more complex than the one of the inverter, we started by deeply analyzing the possible approaches using the pen-and-paper method. The final solution we came to consisted in sharing source/drain diffusions as much as possible, in order to minimize the area in the horizontal direction, similarly to what we did in the inverter design.
+Given that the layout of the half adder is quite more complex than the one of the inverter, we started by deeply analysing the possible approaches using the pen-and-paper method. The final solution we came to consisted in sharing source/drain diffusions as much as possible, in order to minimize the area in the horizontal direction, similarly to what we did in the inverter design.
 
 When actually drawing the design in Virtuoso, we made sure to run the Design Rule Checker (DRC) very often, in order to avoid problems in advance. The final result of this tool was totally similar to the one we obtained for the \inv in section \ref{sec: inv_sch}, and thus it is omitted.
 
-The layout design started by looking at the schematic. First of all we tried to put the two outputs on the opposite sides of the cell. This is because this way, if the inputs are brought over it in the middle with the \texttt{metal2} and linked with vias, the input-output paths are more probably balanced in lenght, keeping the input polysilicon lines shorter and therefore reducing these lines' propagation delays. This assumption lead us to place the carry-out generation network (a NAND gate followed by an inverter) on the left of the layout, and the sum generation network (NOR gate followed by an AOI12 gate) on the righ side.
+The layout design started by looking at the schematic. First of all we tried to put the two outputs on the opposite sides of the cell. This is because this way, if the inputs are brought over it in the middle with the \texttt{metal2} and linked with vias, the input-output paths are more probably balanced in length, keeping the input poly-silicon lines shorter and therefore reducing these lines' propagation delays. This assumption lead us to place the carry-out generation network (a NAND gate followed by an inverter) on the left of the layout, and the sum generation network (NOR gate followed by an AOI12 gate) on the right side.
 Thus we started drawing on a paper the first NMOS of the inverter whose output was CO. With a view to share the sources/drains as much as possible we began putting all the transistors one near the other drawing only the strictly necessary metal.
 We used different colours to have an easier readability and go on drawing only the \texttt{metal1} for the sources/drains and the \texttt{polysilicon} for the gates until the end of the port and left the routing at last. Then we completed the layout linking together the various elements coherently with the schematic view. The resulting pencil draw is reported in figure \ref{fig: lay_drw}.
 
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.8\linewidth]{./Images/HA/layout_drw.png}
-	  \caption{First sketch of the layout. \textcolor{blue}{Blue}: metal1, \textcolor{red}{red}: polysilicon. Labels do not match the position of the corresponding vias.}
+	  \caption{First sketch of the layout. \textcolor{blue}{Blue}: metal1, \textcolor{red}{red}: poly-silicon. Labels do not match the position of the corresponding vias.}
 	  \label{fig: lay_drw}
 \end{figure}
 
@@ -259,7 +259,7 @@ Then we converted this sketch in a real layout design using the Virtuoso embedde
 
 The height of the cell is fixed to \SI{2.66}{\micro\meter} because of the standard-cell format requirements. Its top and ground lines, whose purpose is to power the transistors, are made of \texttt{metal1}. Many entity like this one can be put one next to the other to form a row of cells packed together and fed with global $V_{DD}$ and $GND$ voltage lines.
 
-When we drew the layout with the editor we changed the connections routing a little bit. Instead of putting a single wire of \texttt{polysilicon} to connect each gate with the related input A/B, we used vias and \texttt{metal1} pieces of line. It would have been interesting to compare the performances of the two implementations, to see whether longer polysilicon lines perform better or worse than shorter ones connected through metal lines and vias. Both the layouts are reported in figure \ref{fig: HAX1_layouts}, though only the polysilicon and metal version (figure \ref{fig: polymetal}) has been simulated and characterized due to the lack of time.
+When we drew the layout with the editor we changed the connections routing a little bit. Instead of putting a single wire of \texttt{polysilicon} to connect each gate with the related input A/B, we used vias and \texttt{metal1} pieces of line. It would have been interesting to compare the performances of the two implementations, to see whether longer poly-silicon lines perform better or worse than shorter ones connected through metal lines and vias. Both the layouts are reported in figure \ref{fig: HAX1_layouts}, though only the poly-silicon and metal version (figure \ref{fig: polymetal}) has been simulated and characterized due to the lack of time.
 
 \begin{figure}[H]
     \centering
@@ -279,7 +279,7 @@ When we drew the layout with the editor we changed the connections routing a lit
     \label{fig: HAX1_layouts}
 \end{figure}
 
-Notice how the final layout in figure \ref{fig: polymetal} appears divided in two different active region both for the NMOS and PMOS networks. This is necessary whenever two metal lines are connected to the active region without a gate between them. In fact, during the manufacturing process, the polysilicon layer is lay before the active one. Therefore, the gates prevent the active regions to extend below them, even if the layout masks do. This automatically isolates the drain and source implants and the related metal lines. When no gate is lay between two metal lines, the isolation must be considered as part of the active layer mask. In the early stages of the development this wasn't clear to us, as proved by figure \ref{fig:poly}.
+Notice how the final layout in figure \ref{fig: polymetal} appears divided in two different active region both for the NMOS and PMOS networks. This is necessary whenever two metal lines are connected to the active region without a gate between them. In fact, during the manufacturing process, the poly-silicon layer is lay before the active one. Therefore, the gates prevent the active regions to extend below them, even if the layout masks do. This automatically isolates the drain and source implants and the related metal lines. When no gate is lay between two metal lines, the isolation must be considered as part of the active layer mask. In the early stages of the development this wasn't clear to us, as proved by figure \ref{fig:poly}.
 
 Finally we launched the LVS and then extracted the parasitic elements. The PEX operation gave us a schematic with all the MOS with the relative parasitics. Again, the output log and schematic listed all the extracted resistances and capacitances similarly to what has been reported for the \inv in section \ref{sec: inv_char}. The net is implicit because no wire is drawn, but every terminal has its own label. The following figures show the group of the 16 MOS of the cell, a detail of one MOS to highlight the labels on the terminals and a parasitic capacitance between the drain of that MOS and \texttt{gnd}.
 
@@ -304,7 +304,7 @@ Finally we launched the LVS and then extracted the parasitic elements. The PEX o
 \label{fig: PEX2}
 \end{figure}
 
-Every reference can be spotted looking at the schematic and at the relative file. The PEX produced also the report and the netlist files. In the netlist all the informations about the net with the parasitics can be found. For example here we report the part regarding the previous pictures.
+Every reference can be spotted looking at the schematic and at the relative file. The PEX produced also the report and the net-list files. In the net-list all the informations about the net with the parasitics can be found. For example here we report the part regarding the previous pictures.
 
 \begin{figure}[H]
       \centering
@@ -321,12 +321,12 @@ At this point we were ready to perform the simulations required to fill in the t
 \begin{itemize}
 	\item \textbf{Carry-out} Since the \texttt{CO} generation network is an \texttt{AND} gate of the two inputs \texttt{A} and \texttt{B}, it is necessary to have one of these inputs to be fixed at its high value for the output to switch. Therefore only eight measurements are required to fully characterize this output pin: output falling and rising propagation delays, output fall time and rise time, each of these related to both \texttt{A} and \texttt{B} inputs.
 
-	\item \textbf{Sum} The \texttt{S} generation network is a \texttt{XOR} gate. Its output can thus switch whenever the inputs change from being equal to being different and viceversa. Therefore sixteen measurements are required. It is important to notice that unlike \texttt{CO}, this output shows an inverting behaviour with respect to the related input when the other input is high.
+	\item \textbf{Sum} The \texttt{S} generation network is a \texttt{XOR} gate. Its output can thus switch whenever the inputs change from being equal to being different and vice versa. Therefore sixteen measurements are required. It is important to notice that unlike \texttt{CO}, this output shows an inverting behaviour with respect to the related input when the other input is high.
 \end{itemize}
 
 Having set properly the measurement parameters in the ADE L simulation environment we ran the parametric simulation with the same input transition times and load capacitance values used for the \inv.
 
-Only the results regarding the output falling propagation delays and the output fall times related to the \texttt{A} input are reported. The output rising propagation delays and output rising time are slightly higher than these, of about \SIrange{10}{20}{\nano\second}, but the behaviour is completely similar. Since the \texttt{A} and \texttt{B} paths are quite balanced, there's almost no difference betweeen the related timing parameters. Therefore they are omitted for the sake of clarity and mercy for the reader. Instead, both the measurements related to \texttt{CO} and \texttt{S} are reported one next to the other, in order to make the comparison easier. In figure \ref{fig:HA_tp_L} the output falling propagation delays are shown, while the falling transition times can be found in figure \ref{fig:HA_t_F}.
+Only the results regarding the output falling propagation delays and the output fall times related to the \texttt{A} input are reported. The output rising propagation delays and output rising time are slightly higher than these, of about \SIrange{10}{20}{\nano\second}, but the behaviour is completely similar. Since the \texttt{A} and \texttt{B} paths are quite balanced, there's almost no difference between the related timing parameters. Therefore they are omitted for the sake of clarity and mercy for the reader. Instead, both the measurements related to \texttt{CO} and \texttt{S} are reported one next to the other, in order to make the comparison easier. In figure \ref{fig:HA_tp_L} the output falling propagation delays are shown, while the falling transition times can be found in figure \ref{fig:HA_t_F}.
 
 \begin{figure}[ht]
 	\centering
@@ -342,9 +342,9 @@ Only the results regarding the output falling propagation delays and the output 
 	\label{fig:HA_t_F}
 \end{figure}
 
-The propagation delay of \texttt{S} is lower than the one of \texttt{CO} for very low input transition time and low load capacitance, while it becomes higher at higher values of load capacitance. This behaviour can be explained taking a look at the transistor widths of the two output generation pulldown networks. These are not completely optimized, since two transistors in series have the same width as one transistor alone (see for example the \texttt{AOI12} gate in figure \ref{fig: HAX1_sch}). On the other side, since the inverter in CMOS technology is the logic gate with the higher capacitive gain, the \texttt{CO} generation network is supposed to behave better (lower delays) with higher loads. This is also true for the output transition times, as shown in \ref{fig:HA_t_F}. Another conclusion can be reached from this second plot is that the input transition time has a greater impact with low load capacitances, while for higher values the slope of the output signals is mainly determined by this last component, as confirmed by the converging curves and by the \inv analysis discussed before.
+The propagation delay of \texttt{S} is lower than the one of \texttt{CO} for very low input transition time and low load capacitance, while it becomes higher at higher values of load capacitance. This behaviour can be explained taking a look at the transistor widths of the two output generation pull-down networks. These are not completely optimized, since two transistors in series have the same width as one transistor alone (see for example the \texttt{AOI12} gate in figure \ref{fig: HAX1_sch}). On the other side, since the inverter in CMOS technology is the logic gate with the higher capacitive gain, the \texttt{CO} generation network is supposed to behave better (lower delays) with higher loads. This is also true for the output transition times, as shown in \ref{fig:HA_t_F}. Another conclusion can be reached from this second plot is that the input transition time has a greater impact with low load capacitances, while for higher values the slope of the output signals is mainly determined by this last component, as confirmed by the converging curves and by the \inv analysis discussed before.
 
-Having done the characterization of the \ha on the basis of its lumped parameters from the designed layout, we are intrested in seing how these affect its behaviour with respect to the schematic-based transistor model. This purpose is better achieved with 3D plots, that can easily show the relation among delay, input transition times and load capacitance. These plots are reported in figure \ref{fig:HA_tp_L_diff} and \ref{fig:HA_t_F_diff}.
+Having done the characterization of the \ha on the basis of its lumped parameters from the designed layout, we are interested in seeing how these affect its behaviour with respect to the schematic-based transistor model. This purpose is better achieved with 3D plots, that can easily show the relation among delay, input transition times and load capacitance. These plots are reported in figure \ref{fig:HA_tp_L_diff} and \ref{fig:HA_t_F_diff}.
 
 \begin{figure}[ht]
 	\includegraphics[width=\linewidth]{Images/HA/tp_L_diff_crop.pdf}
@@ -358,7 +358,7 @@ Having done the characterization of the \ha on the basis of its lumped parameter
 	\label{fig:HA_t_F_diff}
 \end{figure}
 
-As we expected, the impact of the lumped components is much grater at lower load capacitances and shorter input transition times, where the timing parameters are about 60\% greater. However, it is intresting to observe how different this impact is when comparing the two output networks. For \texttt{CO} the propagation delay increases with the load capacitance, while it decreases for \texttt{S}. This latter case leads the difference to become even negative at the highest load capacitance and lower input transition time (ratio $tp_{lumped}/tp_{schematic} < 1$), where the lumped parameters simulations brought better timing performance with respect to the schematic ones. The reason for this is uncertain, but it can be related to the shared sources and drains of the different transistors, that could lead to overall lower lumped capacitance with respect to the ones taken into account by the schematic simulation models.
+As we expected, the impact of the lumped components is much grater at lower load capacitances and shorter input transition times, where the timing parameters are about 60\% greater. However, it is interesting to observe how different this impact is when comparing the two output networks. For \texttt{CO} the propagation delay increases with the load capacitance, while it decreases for \texttt{S}. This latter case leads the difference to become even negative at the highest load capacitance and lower input transition time (ratio $tp_{lumped}/tp_{schematic} < 1$), where the lumped parameters simulations brought better timing performance with respect to the schematic ones. The reason for this is uncertain, but it can be related to the shared sources and drains of the different transistors, that could lead to overall lower lumped capacitance with respect to the ones taken into account by the schematic simulation models.
 
 If we look at the plots, we can also see how there's no difference between the simulations at the lowest two values of the input signal transition times. This may be due to the simulation resolution.
 
@@ -377,7 +377,7 @@ If we look at the plots, we can also see how there's no difference between the s
 		\item For the \ha we managed to achieve much better results, resulting in a width of \SI{1.9025}{\micro\meter} versus the \SI{2.66}{\micro\meter} of the original layout.
 	\end{itemize}
 
-	\item \textbf{Further optimization} Better timing performance and smaller areas could be obtained changing the reference design transistor widths according to the best solution for the specific maximum load, setting every single gate width in order to balance the logical effort and driving strength. Nevertheless in this instance we focused on a first level optimization through source/drain sharing and metal/polysilicon paths routing. The use of \texttt{metal1} only makes it possible to employ the upper metal levels to realize the interconnections betweeen cells.
+	\item \textbf{Further optimization} Better timing performance and smaller areas could be obtained changing the reference design transistor widths according to the best solution for the specific maximum load, setting every single gate width in order to balance the logical effort and driving strength. Nevertheless in this instance we focused on a first level optimization through source/drain sharing and metal/poly-silicon paths routing. The use of \texttt{metal1} only makes it possible to employ the upper metal levels to realize the interconnections between cells.
 \end{itemize}
 
 \end{document}
