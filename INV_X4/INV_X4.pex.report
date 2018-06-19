@@ -5,26 +5,28 @@
                   ##          Export Lumped Parameters            ##
                   ##                                              ##
                   ##################################################
- 
- 
- 
+
+
+
 LAYOUT NAME:              INV_X4
 RULE FILE NAME:           rules
 CREATION TIME:            Thu May 31 18:19:25 2018
- 
+
 UNITS:                    Resistance  = ohm
                           Capacitance = farad
                           Time        = ns
- 
- 
+
+
 ---------------------------------------------------------------------------------
 CELL NAME:                INV_X4
- 
+
 Netid      R(UpperBound)      Cvalue      %Coupled    RC(UpperBound)   Netname
 ---------+---------------+-------------+-------------+--------------+------------
 1                     0.0   5.50637e-16       29.1819            0.0  A
             - Coupled nets
-               MM3:d,MM3:d,MM3:d,MM3:d,MM3:d,MM3:d,MM7:d,c_43:n,c_43:n,c_43:n,MM1:d,MM1:d,MM1:d,MM1:d,MM1:d,MM5:d,c_52:n,MM3:s,c_70:n,c_70:n,c_70:n,MM2:s,MM2:s,MM2:s,c_76:n,c_76:n,MM0:s,MM7:s,c_90:n,c_90:n,MM6:s,MM6:s,c_94:n,c_94:n,MM4:s
+               MM3:d,MM3:d,MM3:d,MM3:d,MM3:d,MM3:d,MM7:d,c_43:n,c_43:n,c_43:n,MM1:d,MM1:d,
+               MM1:d,MM1:d,MM1:d,MM5:d,c_52:n,MM3:s,c_70:n,c_70:n,c_70:n,MM2:s,MM2:s,MM2:s,
+               c_76:n,c_76:n,MM0:s,MM7:s,c_90:n,c_90:n,MM6:s,MM6:s,c_94:n,c_94:n,MM4:s
             - Intrinsic Capacitance
                3.89951e-16
             - Coupled capacitance
@@ -67,7 +69,9 @@ Netid      R(UpperBound)      Cvalue      %Coupled    RC(UpperBound)   Netname
 
 2                     0.0   4.97637e-16       73.1851            0.0  ZN
             - Coupled nets
-               MM3:g,c_2:p,c_3:p,MM2:g,MM6:g,c_6:p,MM6:g,MM6:g,c_9:p,MM5:g,MM1:g,MM5:g,c_13:p,MM0:g,MM4:g,MM5:g,MM7:g,MM3:s,c_70:n,MM2:s,MM2:s,MM2:s,c_76:n,c_76:n,MM0:s,MM7:s,c_90:n,c_90:n,MM6:s,MM6:s,MM6:s,c_94:n,MM4:s
+               MM3:g,c_2:p,c_3:p,MM2:g,MM6:g,c_6:p,MM6:g,MM6:g,c_9:p,MM5:g,MM1:g,MM5:g,
+               c_13:p,MM0:g,MM4:g,MM5:g,MM7:g,MM3:s,c_70:n,MM2:s,MM2:s,MM2:s,c_76:n,c_76:n,
+               MM0:s,MM7:s,c_90:n,c_90:n,MM6:s,MM6:s,MM6:s,c_94:n,MM4:s
             - Intrinsic Capacitance
                1.33441e-16
             - Coupled capacitance
@@ -108,7 +112,8 @@ Netid      R(UpperBound)      Cvalue      %Coupled    RC(UpperBound)   Netname
 
 3                     0.0   2.69349e-16       50.1268            0.0  GND
             - Coupled nets
-               MM3:g,MM3:g,MM2:g,c_6:p,MM2:g,c_9:p,MM1:g,MM1:g,MM0:g,MM0:g,MM3:d,MM3:d,MM3:d,c_43:n,MM1:d,c_43:n,MM1:d,MM1:d,MM7:s,MM4:s
+               MM3:g,MM3:g,MM2:g,c_6:p,MM2:g,c_9:p,MM1:g,MM1:g,MM0:g,MM0:g,MM3:d,MM3:d,MM3:d,
+               c_43:n,MM1:d,c_43:n,MM1:d,MM1:d,MM7:s,MM4:s
             - Intrinsic Capacitance
                1.34333e-16
             - Coupled capacitance
@@ -136,7 +141,8 @@ Netid      R(UpperBound)      Cvalue      %Coupled    RC(UpperBound)   Netname
 
 4                     0.0   3.55081e-16       54.3925            0.0  VDD
             - Coupled nets
-               MM7:g,MM7:g,MM6:g,MM6:g,MM5:g,MM5:g,MM4:g,MM4:g,MM7:d,MM7:d,c_43:n,MM7:d,c_43:n,MM5:d,MM5:d,MM5:d,MM3:s,MM0:s
+               MM7:g,MM7:g,MM6:g,MM6:g,MM5:g,MM5:g,MM4:g,MM4:g,MM7:d,MM7:d,c_43:n,MM7:d,c_43:n,
+               MM5:d,MM5:d,MM5:d,MM3:s,MM0:s
             - Intrinsic Capacitance
                1.61944e-16
             - Coupled capacitance
@@ -158,5 +164,3 @@ Netid      R(UpperBound)      Cvalue      %Coupled    RC(UpperBound)   Netname
                3.86405e-17   netid: MM5:d
                5.04182e-19   netid: MM3:s
                5.69945e-19   netid: MM0:s
-
-

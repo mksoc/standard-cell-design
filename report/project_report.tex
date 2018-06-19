@@ -79,6 +79,10 @@ and
 \begin{equation*}
 	\texttt{/home/md18.5/project/HAX1/}
 \end{equation*}
+while the current report file and the liberty files filled with the simulation data can be found in
+\begin{equation*}
+	\texttt{/home/md18.5/project/report\_files/}
+\end{equation*}
 
 Note that all the material, like scripts and the current report files, can be found in the following GitHub repository:
 \begin{center}
@@ -140,8 +144,8 @@ The first step toward the complete characterization of our logic gate was the ex
 
 Then, we generated a new config view for our cell and linked it to the calibre view, which contains the aforementioned netlist with the parasitics. We then set up the old test bench to use this new view and ran the automatic simulations needed to compile the Liberty file and compare with the schematic simulations.
 
-In order to fill in the Liberty file faster we developed a Matlab script that convert the traces exported in \texttt{.csv} from Virtuoso into the correct format for the \texttt{.lib} file, which is shown in the following snippet:
-\verbfilenobox[\small]{../INV_X4/INV_X4.lib}
+In order to fill in the Liberty file faster we developed a Matlab script that converts the traces exported in \texttt{.csv} from Virtuoso into the correct format for the \texttt{INV\_X4.lib} file, that can be found in the report directory on GitHub or on the server.
+%\verbfilenobox[\small]{../INV_X4/INV_X4.lib}
 
 We also developed another Matlab script to plot the results of the simulations, shown in the following figures.
 \begin{figure}[H]
@@ -199,6 +203,7 @@ We can note that for very small load capacitance values the simulations done on 
 
 The case of the rising propagation delay is a bit different in that it shows a very large difference between simulations for small load capacitance values: greater that 100\%. This behavior has shown to be consistent among different measurements and tests, but we could not really explain why it shows up, as we expected rising and falling delays to be more or less symmetrical.
 
+\newpage
 \section{Half adder}
 \subsection{Schematic}
 The schematic was drawn using Virtuoso Schematic Editor (figure \ref{fig: HAX1_sch}), following the reference \texttt{.png} shown in figure \ref{fig: HAX1_png}.
@@ -220,7 +225,7 @@ We report here the final schematic used to create the layout.
 \begin{figure}[H]
       \centering
        \includegraphics[width=\linewidth]{./Images/HA/HAX1_schematic.png}
-\caption{HAX1 schematic}
+\caption{\ha schematic}
 \label{fig: HAX1_sch}
 \end{figure}
 
@@ -320,5 +325,63 @@ At this point we were ready to perform the simulations required to fill the timi
 
 Having set properly the measurement parameters in the ADE L simulation environment we ran the parametric simulation with the same input transition times and load capacitance values used for the \inv.
 
+Only the results regarding the output falling propagation delays and the output falling times related to the \texttt{A} input are reported. The output rising propagation delays and output rising time are slightly higher than these (\SIrange{10}{20}{\nano\second}), but the behaviour is completely similar. Since the \texttt{A} and \texttt{B} paths are quite balanced, there's almost no difference betweeen the related parameters. Therefore they are omitted for the sake of clarity and mercy for the reader. Instead, both the measurements related to \texttt{CO} and \texttt{S} are reported one next to the other, in order to make the comparison easier to the reader. In figure \ref{fig:HA_tp_L} the output falling propagation delays are shown, while the falling transition times can be found in figure \ref{fig:HA_t_F}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{Images/HA/tp_L_crop.pdf}
+	\caption{\ha output falling propagation delays}
+	\label{fig:HA_tp_L}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{Images/HA/t_F_crop.pdf}
+	\caption{\ha output falling times}
+	\label{fig:HA_t_F}
+\end{figure}
+
+The propagation delay of \texttt{S} is lower than the one of \texttt{CO} for very low input transition times and low load capacitance, while it becomes higher at higher values of load capacitance. This behaviour can be explained taking a look at the transistor widths of the two output generation pulldown networks. These are not completely optimized, since two transistors in series have the same width as one transistor alone (see for example the \texttt{AOI12} gate in figure \ref{fig: HAX1_sch}). On the other side, since the inverter is the logic gate with the higher capacitive gain, the \texttt{CO} generation network is supposed to behave better (lower delays) with higher loads. This is also true for the output transition times, as shown in \ref{fig:HA_t_F}. Another conclusion can be reached from this second plot is that the input transition time has a greater impact with low load capacitances, while for higher values the slope of the output signals is mainly determined by this last component, as confirmed by the converging curves.
+
+Having done the characterization of the \ha on the basis of its lumped parameters of the designed layout, we are intrested in seing how these affect his behaviour with respect to the schematic-based transistor model. This purpose is better achieved with 3D plots, that can easily show the relation among delay, input transition times and load capacitance. These plots are reported in figure \ref{fig:HA_tp_L_diff} and \ref{fig:HA_t_F_diff}.
+
+\begin{figure}[ht]
+	\includegraphics[width=\linewidth]{Images/HA/tp_L_diff_crop.pdf}
+	\caption{Relative output falling propagation delays vs. load capacitance and input transition time}
+	\label{fig:HA_tp_L_diff}
+\end{figure}
+
+\begin{figure}[ht]
+	\includegraphics[width=\linewidth]{Images/HA/t_F_diff_crop.pdf}
+	\caption{Relative output falling times vs. load capacitance and input transition time}
+	\label{fig:HA_t_F_diff}
+\end{figure}
+
+As we can expect, the impact of the lumped components is much grater at lower load capacitances and shorter input transition times, where the timing parameters are about 60\% greater. However, it is intresting to observe how different this impact is when comparing the two output networks. For \texttt{CO} the propagation delay increases with the load capacitance, while it decreases for \texttt{S}. This latter case leads the difference to become even negative at the highest load capacitance and lower input transition time (ratio $tp_{lumped}/tp_{schematic} < 1$), where the lumped parameters simulations brought better timing performance with respect to the schematic ones. The reason for this is uncertain, but it can be related to the shared sources and drains of the different transistors, that could lead to overall lower lumped capacitance with respect to the ones taken into account by the schematic simulation models.
+
+If we look at the plots, we can also see how there's no difference between the simulations at the lowest two values of the input signal transition times.
+
+\subsection{Remarks}
+
+\begin{itemize}
+	\item \textbf{Working frequency} From the timing parameters (see the file \texttt{HA\_X1.lib} for full characterization) we can see how the propagation delay of the \ha is always lower than \SI{150}{\pico\second}. This means that the component can be inserted in a circuit (for example a pipeline stage) that works at a maximum clock frequency of \SI{6.7}{\giga\hertz}, if sequential components timing constraints are ignored.
+\end{itemize}
+
+\section{Conclusion}
+
+The Lyberty \texttt{.lib} files of the designed gates can be found on the server along with this report in the following path:
+\begin{equation*}
+	\texttt{/home/md18.5/project/report\_files/}
+\end{equation*}
+\begin{itemize}
+	\item \textbf{Area} Due to the different input vector used for the characterization of the original library gates it is impossible to directly compare those cells with ours. However, a comparison can be done about the standard cell areas. The standard cell like design fixes the height of the gates to \SI{2.67}{\micro\meter} for both the layouts.
+	\begin{itemize}
+		\item For the \inv we were able to achieve a cell width of \SI{1.33}{\micro\meter}, slightly larger than the \SI{1.0975}{\micro\meter} of the original layout.
+
+		\item For the \ha we managed to achieve much better results, resulting in a width of \SI{1.9025}{\micro\meter} versus the \SI{2.66}{\micro\meter} of the original layout.
+	\end{itemize}
+
+	\item \textbf{Further optimization} Better timing performance and smaller areas could be obtained changing the reference design transistor widths according to the best solution for the specific maximum load, setting every single gate width in order to balance the logical effort and driving strength. Nevertheless in this instance we focused on a first level optimization through source/drain sharing and metal/polysilicon paths routing. The use of \texttt{metal1} only makes it possible to employ the upper metal levels to realize the interconnections betweeen cells.
+\end{itemize}
 
 \end{document}

@@ -7,7 +7,7 @@
 
 	drive_strength     	: 1;
 
-	area               	: 1.9025; //2.660000 (5.079675um2 vs 6.1143um2);
+	area               	: 1.9025; // 2.660000 (5.079675um2 vs 6.1143um2);
 	pg_pin(VDD) {
 		voltage_name : VDD;
 		pg_type      : primary_power;
