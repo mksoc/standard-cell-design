@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 # Uploads the report and .lib files to the server
 # Give yourself permissions to execute with chmod ;)
-scp -P 10026 ./report/project_report.tex ./report/project_report.pdf ./HA_X1/HA_X1.lib ./INV_X4/INV_X4.lib md18.5@led-x3850-2.polito.it:/home/md18.5/project/report_files/
+scp -P 10026 ./report/gr05_report.tex ./report/gr05_report.pdf ./HA_X1/HA_X1.lib ./INV_X4/INV_X4.lib md18.5@led-x3850-2.polito.it:/home/md18.5/project/report_files/
+
+# Zip report PDF (to be uploaded on the course website)
+zip ./report/gr05_report.zip ./report/gr05_report.pdf
